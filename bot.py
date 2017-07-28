@@ -43,12 +43,15 @@ s.send("JOIN {}\r\n".format(cfg.CHAN).encode("utf-8"))
 
 while True:
     response = s.recv(1024).decode("utf-8")
+    # if the bot is pinged by twitch it responds with its pong so it doesn't get timed out for inactivity
     if response == "PING :tmi.twitch.tv\r\n":
         s.send("PONG :tmi.twitch.tv\r\n".encode("utf-8"))
     else:
+        # fetch the username and message from the response
         username = re.search(r"\w+", response).group(0)
         message = CHAT_MSG.sub("", response)
         print(username + ": " + message)
+        # if the response is a command, parse the command
         if message[0] == "!":
             #strip the "!" from the command
             command = message[1:]
@@ -65,4 +68,5 @@ while True:
                     chat(s, "Metal Gear is fucking awful\r\n")
             else:
                 chat(s, "What are you even trying to say. Get out of here.\r\n")
+
     time.sleep(1 / cfg.RATE)
