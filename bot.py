@@ -50,5 +50,17 @@ while True:
     else:
         username = re.search(r'\w+', response).group(0)
         message = CHAT_MSG.sub('', response)
-        print(username + ': ' + response)
+        print(username + ': ' + message)
+        if message[0] == '!':
+            #strip the '!' from the command
+            command = message[1:]
+            if command in cfg.COMM_PATT:
+                if command == 'discord':
+                    chat(s, 'https://discord.gg/tCuyGGY')
+                elif command == 'pb':
+                    chat(s, 'http://www.speedrun.com/user/alexh0we')
+                elif command == 'wr':
+                    chat(s, 'http://www.speedrun.com')
+            else:
+                chat(s, 'What are you even trying to say. Get out of here.')
     time.sleep(1 / cfg.RATE)

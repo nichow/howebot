@@ -1,4 +1,5 @@
 #gitignore for howebot
 
+__pycache__/
 .idea/
 cfg.py
