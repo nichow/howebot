@@ -7,6 +7,8 @@ import re
 
 import commands.hello as hello
 import commands.discord as discord
+import commands.wr as wr
+import commands.pb as pb
 
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
 
@@ -62,9 +64,9 @@ while True:
                 if command == "discord\r\n":
                     chat(s, discord.discord(cfg.CHAN) + "\r\n")
                 elif command == "pb\r\n":
-                    chat(s, "http://www.speedrun.com/user/alexh0we\r\n")
+                    chat(s,  pb.pb() + "\r\n")
                 elif command == "wr\r\n":
-                    chat(s, "http://www.speedrun.com\r\n")
+                    chat(s, wr.world_record() + "\r\n")
                 elif command == "hello\r\n":
                     chat(s, hello.greet(username) + "\r\n")
                 elif command == "metalgear\r\n":
