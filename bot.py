@@ -13,16 +13,15 @@ def chat(sock, message):
     sends a chat message to the server
     :param sock: the socket over which to send the message
     :param message: the message to be sent
-    :return: null
     """
-    sock.send('PRIVMSG {} :{}'.format(cfg.CHAN, message))
+    sock.send('PRIVMSG {} :{}'.format(cfg.CHAN, message).encode('utf-8'))
+    print('sent: {}'.format(message))
 
 def ban(sock, user):
     """
     bans a user from the channel
     :param sock: the socket over which to send the ban command
     :param user: the user to be banned
-    :return: null
     """
     chat(sock, '.ban {}'.format(user))
 
@@ -32,7 +31,6 @@ def timeout(sock, user, secs=300):
     :param sock: the socket over which to send the timeout command
     :param user: the user to be timed out
     :param secs: the time which the user will be timed out
-    :return: null
     """
     chat(sock, '.timeout {}'.format(user))
 
@@ -55,12 +53,12 @@ while True:
             #strip the '!' from the command
             command = message[1:]
             if command in cfg.COMM_PATT:
-                if command == 'discord':
-                    chat(s, 'https://discord.gg/tCuyGGY')
-                elif command == 'pb':
-                    chat(s, 'http://www.speedrun.com/user/alexh0we')
-                elif command == 'wr':
-                    chat(s, 'http://www.speedrun.com')
+                if command == 'discord\r\n':
+                    chat(s, 'https://discord.gg/tCuyGGY\r\n')
+                elif command == 'pb\r\n':
+                    chat(s, 'http://www.speedrun.com/user/alexh0we\r\n')
+                elif command == 'wr\r\n':
+                    chat(s, 'http://www.speedrun.com\r\n')
             else:
-                chat(s, 'What are you even trying to say. Get out of here.')
+                chat(s, 'What are you even trying to say. Get out of here.\r\n')
     time.sleep(1 / cfg.RATE)
