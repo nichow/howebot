@@ -15,7 +15,7 @@ def chat(sock, message):
     :param message: the message to be sent
     :return: null
     """
-    sock.send('PRIVMSG () :()'.format(cfg.CHAN, message))
+    sock.send('PRIVMSG {} :{}'.format(cfg.CHAN, message))
 
 def ban(sock, user):
     """
