@@ -5,6 +5,9 @@ import socket
 import time
 import re
 
+import commands.hello as hello
+import commands.discord as discord
+
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
 
 # NETWORK FUNCTIONS #
@@ -57,13 +60,13 @@ while True:
             command = message[1:]
             if command in cfg.COMM_PATT:
                 if command == "discord\r\n":
-                    chat(s, "https://discord.gg/tCuyGGY\r\n")
+                    chat(s, discord.discord(cfg.CHAN) + "\r\n")
                 elif command == "pb\r\n":
                     chat(s, "http://www.speedrun.com/user/alexh0we\r\n")
                 elif command == "wr\r\n":
                     chat(s, "http://www.speedrun.com\r\n")
                 elif command == "hello\r\n":
-                    chat(s, "What's going good {}.\r\n".format(username))
+                    chat(s, hello.greet(username) + "\r\n")
                 elif command == "metalgear\r\n":
                     chat(s, "Metal Gear is fucking awful\r\n")
             else:
