@@ -60,7 +60,7 @@ while True:
                 elif command == "wr\r\n":
                     chat(s, "http://www.speedrun.com\r\n")
                 elif command == "hello\r\n":
-                    chat(s, "What's going good fam.\r\n")
+                    chat(s, "What's going good {}.\r\n".format(username))
                 elif command == "metalgear\r\n":
                     chat(s, "Metal Gear is fucking awful\r\n")
             else:
