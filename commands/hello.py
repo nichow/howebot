@@ -1,6 +1,6 @@
 # hello.py, the greeting command
 # TODO: add a plethora of additional greeting options for funsies
-import random as r
+# import random as r
 
 def greet(username):
     """
@@ -8,7 +8,4 @@ def greet(username):
     :param username: the user to be greeted
     :return: string containing the greeting
     """
-    rand = int(r.Random(2 ** 10))
-    if rand % 2 == 0:
-        return "How's it hanging' {}".format(username)
     return "Hey hey hey, what's goin' good {}".format(username)

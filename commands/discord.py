@@ -7,10 +7,10 @@ def discord(channel):
     :return: the discord info or appropriate message
     """
     #returns alex's discord
-    if channel == "#alexh0we\r\n":
+    if channel == "#alexh0we":
         return "https://discord.gg/tCuyGGY"
     #returns my dumb joke
-    elif channel == "#nic_how\r\n":
+    elif channel == "#nic_how":
         return "hahaha nic doesn't have his own discord who do you think he is?"
     else:
         return "no discord info found"
