@@ -55,7 +55,7 @@ def get_followers():
     fetches the follower data
     :return: number of followers
     """
-    follows_url = "https://api.twitch.tv/kraken/channels/" + \
-                    CHANNEL + "/follows" + "&client_id=" + CLIENT_ID
-    res = req.urlopen(follows_url, None)
-    return json.load(res)
+    res = req.urlopen(URL, None)
+    data = json.load(res)
+    stream_data = data["stream"]
+    return stream_data["followers"]

@@ -63,7 +63,7 @@ while True:
             command = message[1:]
             if command in cfg.COMM_PATT:
                 if command == "discord\r\n":
-                    chat(s, discord.discord(cfg.CHAN) + "\r\n")
+                    chat(s, "@" + username + discord.discord(cfg.CHAN) + "\r\n")
                 elif command == "pb\r\n":
                     chat(s,  pb.pb() + "\r\n")
                 elif command == "wr\r\n":
