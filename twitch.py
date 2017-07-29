@@ -41,9 +41,9 @@ def get_uptime():
     """
     format = "%Y-%m-%d %H:%M:%S"
     res = req.urlopen(URL, None)
-    data = json.loads(res)
+    data = json.load(res)
     if data["stream"] != None:
-        start = str(data["stream"].get("created_at")).replace('T', ' ').replace('Z,', '')
+        start = str(data["stream"].get("created_at")).replace('T', ' ').replace('Z', '')
         start = datetime.datetime.strptime(start, format)
         delta = datetime.datetime.utcnow() - start
         return str(delta).split('.')[0]

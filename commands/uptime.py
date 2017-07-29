@@ -3,4 +3,4 @@
 import twitch
 
 def uptime():
-    twitch.get_uptime()
+    return "Alex has been live for " + twitch.get_uptime() + "\r\n"
