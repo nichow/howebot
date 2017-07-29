@@ -9,6 +9,7 @@ import commands.hello as hello
 import commands.discord as discord
 import commands.wr as wr
 import commands.pb as pb
+import commands.uptime as uptime
 
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
 
@@ -35,7 +36,7 @@ def timeout(sock, user, secs=300):
     times a user out for a specified period of time (default 5 mins)
     :param sock: the socket over which to send the timeout command
     :param user: the user to be timed out
-    :param secs: the time which the user will be timed out
+    :param secs: the time which the user will be timed out; defaults to 300 seconds
     """
     chat(sock, ".timeout {}".format(user))
 
@@ -67,6 +68,8 @@ while True:
                     chat(s,  pb.pb() + "\r\n")
                 elif command == "wr\r\n":
                     chat(s, wr.world_record() + "\r\n")
+                elif command == "uptime\r\n":
+                    chat(s, uptime.uptime())
                 elif command == "hello\r\n":
                     chat(s, hello.greet(username) + "\r\n")
                 elif command == "metalgear\r\n":

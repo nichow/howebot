@@ -1,5 +1,5 @@
 # hello.py, the greeting command
-
+# TODO: add a plethora of additional greeting options for funsies
 import random as r
 
 def greet(username):
