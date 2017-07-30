@@ -31,8 +31,11 @@ def get_game():
     """
     res = req.urlopen(URL, None)
     data = json.load(res)
-    stream_data = data["stream"]
-    return stream_data["game"]
+    if data["stream"] != None:
+        stream_data = data["stream"]
+        return stream_data["game"]
+    else:
+        return None
 
 def get_uptime():
     """

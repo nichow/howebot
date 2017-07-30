@@ -5,11 +5,13 @@ import socket
 import time
 import re
 
+
 import commands.hello as hello
 import commands.discord as discord
 import commands.wr as wr
 import commands.pb as pb
 import commands.uptime as uptime
+import commands.commands as commands
 
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
 
@@ -63,18 +65,20 @@ while True:
             command = message[1:]
             if command in cfg.COMM_PATT:
                 if command == "discord\r\n":
-                    chat(s, "@" + username + discord.discord(cfg.CHAN) + "\r\n")
+                    chat(s, "@" + username + " " + discord.discord(cfg.CHAN) + "\r\n")
                 elif command == "pb\r\n":
-                    chat(s,  pb.pb() + "\r\n")
+                    chat(s, "@" + username + " " +  pb.pb() + "\r\n")
                 elif command == "wr\r\n":
-                    chat(s, wr.world_record() + "\r\n")
+                    chat(s, "@" + username + " " + wr.world_record() + "\r\n")
                 elif command == "uptime\r\n":
-                    chat(s, uptime.uptime())
+                    chat(s, "@" + username + " " + uptime.uptime() + "\r\n")
                 elif command == "hello\r\n":
                     chat(s, hello.greet(username) + "\r\n")
+                elif command == "commands\r\n":
+                    chat(s, commands.commands())
                 elif command == "metalgear\r\n":
                     chat(s, "Metal Gear is fucking awful\r\n")
             else:
-                chat(s, "What are you even trying to say. Get out of here.\r\n")
+                chat(s, "What are you even trying to say, {}. Get out of here.\r\n").format(username)
 
     time.sleep(1 / cfg.RATE)
