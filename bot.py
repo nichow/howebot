@@ -79,6 +79,6 @@ while True:
                 elif command == "metalgear\r\n":
                     chat(s, "Metal Gear is fucking awful\r\n")
             else:
-                chat(s, "What are you even trying to say, {}. Get out of here.\r\n").format(username)
+                chat(s, "What are you even trying to say, {}. Get out of here. Try !commands next time.\r\n").format(username)
 
     time.sleep(1 / cfg.RATE)

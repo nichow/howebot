@@ -14,5 +14,7 @@ def world_record():
         return "http://www.speedrun.com/hl1"
     elif game == 'Half-Life: Opposing Force':
         return "https://www.speedrun.com/op4"
+    elif game == 'Gunman Chronicles':
+        return "https://www.speedrun.com/gmc"
     else:
         "Uh... not sure. Find the game here: http://www.speedrun.com"
