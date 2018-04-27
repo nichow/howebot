@@ -13,7 +13,7 @@ import commands.uptime as uptime
 import commands.commands as commands
 
 from flask import Flask
-app = Flask(__name__)
+bot = Flask(__name__)
 
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
 
@@ -96,4 +96,4 @@ def main():
 
 
 if __name__ == "__main__":
-    app.run()
+    bot.run()
