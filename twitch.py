@@ -3,13 +3,13 @@
 import json
 import datetime
 from urllib import request as req
+import os
 
-import cfg
-
-CLIENT_ID = cfg.CLID
-CHANNEL = cfg.CHAN.lstrip('#')
+CLIENT_ID = os.environ.get("CLID")
+CHANNEL = os.environ.get("CHAN").lstrip('#')
 URL = "https://api.twitch.tv/kraken/streams/" + \
             CHANNEL + "?client_id=" + CLIENT_ID
+
 
 def get_channel_id():
     """
@@ -24,6 +24,7 @@ def get_channel_id():
         channel_id = 0
     return channel_id
 
+
 def get_game():
     """
     get the game being played on stream
@@ -36,6 +37,7 @@ def get_game():
         return stream_data["game"]
     else:
         return None
+
 
 def get_uptime():
     """
@@ -52,6 +54,7 @@ def get_uptime():
         return str(delta).split('.')[0]
     else:
         return None
+
 
 def get_followers():
     """
