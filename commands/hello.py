@@ -2,6 +2,7 @@
 # TODO: add a plethora of additional greeting options for funsies
 # import random as r
 
+
 def greet(username):
     """
     greets the specified user

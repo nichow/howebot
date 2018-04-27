@@ -1,12 +1,14 @@
 # commands.py
 
-from cfg import COMM_PATT
+import os
+
 
 def commands():
     """
     lists the commands usable by the bot
     :return: every possible command except command
     """
+    COMM_PATT = os.environ.get("COMM_PATT")
     _ret = "I can do these things: "
     for command in COMM_PATT:
         if command != "commands\r\n":

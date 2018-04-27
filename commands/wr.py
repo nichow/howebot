@@ -2,6 +2,7 @@
 
 from twitch import get_game
 
+
 def world_record():
     """
     the wr command refers the user to the speedrun database

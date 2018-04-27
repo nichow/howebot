@@ -1,6 +1,6 @@
 # app.py
 
-import cfg
+import os
 import socket
 import time
 import re
@@ -25,7 +25,7 @@ def chat(sock, message):
     :param sock: the socket over which to send the message
     :param message: the message to be sent
     """
-    sock.send("PRIVMSG {} :{}".format(cfg.CHAN, message).encode("utf-8"))
+    sock.send("PRIVMSG {} :{}".format(os.environ.get("CHAN"), message).encode("utf-8"))
     print("sent: {}".format(message))
 
 
@@ -51,10 +51,10 @@ def timeout(sock, user, secs=300):
 @app.route("/")
 def main():
     s = socket.socket()
-    s.connect((cfg.HOST, cfg.PORT))
-    s.send("PASS {}\r\n".format(cfg.PASS).encode("utf-8"))
-    s.send("NICK {}\r\n".format(cfg.NICK).encode("utf-8"))
-    s.send("JOIN {}\r\n".format(cfg.CHAN).encode("utf-8"))
+    s.connect((os.environ.get("HOST"), os.environ.get("PORT")))
+    s.send("PASS {}\r\n".format(os.environ.get("PASS")).encode("utf-8"))
+    s.send("NICK {}\r\n".format(os.environ.get("NICK")).encode("utf-8"))
+    s.send("JOIN {}\r\n".format(os.environ.get("CHAN")).encode("utf-8"))
 
     while True:
         print("running\n")
@@ -72,9 +72,9 @@ def main():
             if message[0] == "!":
                 # strip the "!" from the command
                 command = message[1:]
-                if command in cfg.COMM_PATT:
+                if command in os.environ.get("COMM_PATT"):
                     if command == "discord\r\n":
-                        chat(s, "@" + username + " " + discord.discord(cfg.CHAN) + "\r\n")
+                        chat(s, "@" + username + " " + discord.discord(os.environ.get("CHAN")) + "\r\n")
                     elif command == "pb\r\n":
                         chat(s, "@" + username + " " + pb.pb() + "\r\n")
                     elif command == "wr\r\n":
@@ -92,7 +92,7 @@ def main():
                          "What are you even trying to say, {}. Get out of here. Try !commands next time.\r\n").format(
                         username)
 
-        time.sleep(1 / cfg.RATE)
+        time.sleep(1 / os.environ.get("RATE"))
 
 
 if __name__ == "__main__":
