@@ -61,7 +61,6 @@ def main():
     s.send(chan)
 
     while True:
-        print("fuck")
         response = s.recv(1024).decode("utf-8")
         # if the bot is pinged by twitch it responds with its pong so it doesn't get timed out for inactivity
         if response == "PING :tmi.twitch.tv\r\n":
