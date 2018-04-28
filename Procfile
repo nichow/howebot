@@ -1,1 +1,1 @@
-worker: waitress-serve app:app web: python app.py
+web: python app.py app:app
