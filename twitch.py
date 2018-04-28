@@ -5,8 +5,8 @@ import datetime
 from urllib import request as req
 import os
 
-CLIENT_ID = os.environ.get("CLID")
-CHANNEL = os.environ.get("CHAN").lstrip('#')
+CLIENT_ID = str(os.environ.get("CLID"))
+CHANNEL = str(os.environ.get("CHAN")).lstrip('#')
 URL = "https://api.twitch.tv/kraken/streams/" + \
             CHANNEL + "?client_id=" + CLIENT_ID
 
@@ -32,7 +32,7 @@ def get_game():
     """
     res = req.urlopen(URL, None)
     data = json.load(res)
-    if data["stream"] != None:
+    if data["stream"] is not None:
         stream_data = data["stream"]
         return stream_data["game"]
     else:
@@ -47,7 +47,7 @@ def get_uptime():
     format = "%Y-%m-%d %H:%M:%S"
     res = req.urlopen(URL, None)
     data = json.load(res)
-    if data["stream"] != None:
+    if data["stream"] is not None:
         start = str(data["stream"].get("created_at")).replace('T', ' ').replace('Z', '')
         start = datetime.datetime.strptime(start, format)
         delta = datetime.datetime.utcnow() - start

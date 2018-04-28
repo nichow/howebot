@@ -12,10 +12,11 @@ import commands.pb as pb
 import commands.uptime as uptime
 import commands.commands as commands
 
+from dotenv import load_dotenv
 from flask import Flask
 app = Flask(__name__)
-
 CHAT_MSG = re.compile(r"^:\w+!\w+@\w+\.tmi\.twitch\.tv PRIVMSG #\w+ :")
+load_dotenv()
 
 
 # NETWORK FUNCTIONS #
@@ -51,13 +52,15 @@ def timeout(sock, user, secs=300):
 @app.route("/")
 def main():
     s = socket.socket()
-    s.connect((os.environ.get("HOST"), os.environ.get("PORT")))
-    s.send("PASS {}\r\n".format(os.environ.get("PASS")).encode("utf-8"))
-    s.send("NICK {}\r\n".format(os.environ.get("NICK")).encode("utf-8"))
-    s.send("JOIN {}\r\n".format(os.environ.get("CHAN")).encode("utf-8"))
+    s.connect((os.getenv("HOST"), int(os.getenv("PORT"))))
+    pw = "PASS {}\r\n".format(os.getenv("PASS")).encode('utf-8')
+    nick = "NICK {}\r\n".format(os.getenv("NICK")).encode('utf-8')
+    chan = "JOIN {}\r\n".format(os.getenv("CHAN")).encode('utf-8')
+    s.send(pw)
+    s.send(nick)
+    s.send(chan)
 
     while True:
-        print("running\n")
         response = s.recv(1024).decode("utf-8")
         # if the bot is pinged by twitch it responds with its pong so it doesn't get timed out for inactivity
         if response == "PING :tmi.twitch.tv\r\n":
@@ -72,7 +75,7 @@ def main():
             if message[0] == "!":
                 # strip the "!" from the command
                 command = message[1:]
-                if command in os.environ.get("COMM_PATT"):
+                if command in commands.comm_patt:
                     if command == "discord\r\n":
                         chat(s, "@" + username + " " + discord.discord(os.environ.get("CHAN")) + "\r\n")
                     elif command == "pb\r\n":
@@ -91,9 +94,9 @@ def main():
                     chat(s,
                          "What are you even trying to say, {}. Get out of here. Try !commands next time.\r\n").format(
                         username)
-
-        time.sleep(1 / os.environ.get("RATE"))
+        rate = 20 / 30
+        time.sleep(1 / rate)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
